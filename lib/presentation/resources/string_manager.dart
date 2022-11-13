@@ -27,6 +27,7 @@ class AppStrings {
 
   //Error
   static const String kEmailNullError = "Please Enter your email";
+  static const String emptyString = "please fill up the form";
   static const String kInvalidEmailError = "Please Enter Valid Email";
   static const String kPassNullError = "Please Enter your password";
   static const String kShortPassError = "Password is too short";

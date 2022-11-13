@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class SignInController extends GetxController {
-  final FormKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   String? email;
   String? password;
   List errors = [].obs;

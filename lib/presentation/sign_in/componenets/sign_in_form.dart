@@ -1,63 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pasal/app/constants/app.constants.dart';
+import 'package:pasal/presentation/helper/keyboard_utlis.dart';
 import 'package:pasal/presentation/resources/asset_manager.dart';
+import 'package:pasal/presentation/resources/size_config.dart';
 import 'package:pasal/presentation/sign_in/sign_in_controller.dart';
 import 'package:pasal/widgets/custom_surfix_icon.dart';
+import 'package:pasal/widgets/form_error.dart';
 import '../../../widgets/default_button.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/string_manager.dart';
 
-class SigninForm extends StatelessWidget {
-  SigninForm({super.key});
+class SignForm extends StatelessWidget {
+  SignForm({super.key});
+
   final SignInController _signInController = Get.put(SignInController());
+
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _signInController.FormKey,
+      key: _signInController.formKey,
       child: Column(
         children: [
-          TextFormField(
-            decoration: InputDecoration(
-                label: const Text(AppStrings.email),
-                labelStyle: TextStyle(
-                    color: ColorManager.grey1, fontWeight: FontWeight.w600),
-                hintText: AppStrings.enterEmail,
-                suffixIcon:
-                    const CustomSurfixIcon(svgIcon: ImageAssts.emailIcon)),
-            cursorColor: ColorManager.grey1,
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                label: const Text(AppStrings.password),
-                labelStyle: TextStyle(
-                    color: ColorManager.grey1, fontWeight: FontWeight.w600),
-                hintText: AppStrings.enterPassword,
-                suffixIcon:
-                    const CustomSurfixIcon(svgIcon: ImageAssts.emailIcon)),
-            cursorColor: ColorManager.grey1,
-          ),
-          const SizedBox(
-            height: 40,
-          ),
+          buildEmailFormField(),
+          const SizedBox(height: 30),
+          buildPasswordFormField(),
+          const SizedBox(height: 30),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Obx(() => Checkbox(
-                      value: _signInController.remember!.value,
-                      onChanged: (value) {
-                        _signInController.changeRememberValue(value!);
-                      })),
-                  const Text(AppStrings.rememberMe),
-                ],
+              Obx(
+                () => Checkbox(
+                  value: _signInController.remember!.value,
+                  activeColor: ColorManager.kPrimaryColor,
+                  onChanged: (value) {
+                    _signInController.changeRememberValue(value!);
+                  },
+                ),
               ),
-              InkWell(
+              const Text(AppStrings.rememberMe),
+              const Spacer(),
+              GestureDetector(
                 onTap: () {
-                  // print("asdasd");
+                  //  Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
                 },
                 child: const Text(
                   AppStrings.forgotPassword,
@@ -66,13 +50,96 @@ class SigninForm extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
-            height: 40,
+          FormError(errors: _signInController.errors),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          DefaultButton(
+            text: AppStrings.continueText,
+            press: () {
+              if (_signInController.formKey.currentState!.validate()) {
+                _signInController.formKey.currentState!.save();
+                // if all are valid then go to success screen
+                KeyboardUtil.hideKeyboard(context);
+                //  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              }
+            },
           ),
-          const DefaultButton(
-            text: AppStrings.signIn,
-          )
         ],
+      ),
+    );
+  }
+
+  TextFormField buildPasswordFormField() {
+    return TextFormField(
+      obscureText: true,
+      onSaved: (newValue) => _signInController.password = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          _signInController.removeError(error: AppStrings.kPassNullError);
+        } else if (value.length >= 8) {
+          _signInController.removeError(error: AppStrings.kShortPassError);
+        }
+        return;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          _signInController.addError(error: AppStrings.kPassNullError);
+          return "";
+        } else if (value.length < 8) {
+          _signInController.addError(error: AppStrings.kShortPassError);
+          return "";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: AppStrings.password,
+        hintText: AppStrings.enterPassword,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: const CustomSurfixIcon(svgIcon: ImageAssts.lockIcon),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: ColorManager.kTextColor),
+          gapPadding: 10,
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 42, vertical: 20),
+      ),
+    );
+  }
+
+  TextFormField buildEmailFormField() {
+    return TextFormField(
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (newValue) => _signInController.email = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          _signInController.removeError(error: AppStrings.kEmailNullError);
+        } else if (emailValidatorRegExp.hasMatch(value)) {
+          _signInController.removeError(error: AppStrings.kInvalidEmailError);
+        }
+        return;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          _signInController.addError(error: AppStrings.kEmailNullError);
+          return AppStrings.emptyString;
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
+          _signInController.addError(error: AppStrings.kInvalidEmailError);
+          return AppStrings.emptyString;
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: AppStrings.email,
+        hintText: AppStrings.enterEmail,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: const CustomSurfixIcon(svgIcon: ImageAssts.emailIcon),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: ColorManager.kTextColor),
+          gapPadding: 10,
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 42, vertical: 20),
       ),
     );
   }

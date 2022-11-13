@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pasal/presentation/resources/asset_manager.dart';
@@ -7,7 +5,7 @@ import 'package:pasal/presentation/resources/size_config.dart';
 
 class FormError extends StatelessWidget {
   const FormError({super.key, this.errors});
-  final List<String>? errors;
+  final List<dynamic>? errors;
 
   @override
   Widget build(BuildContext context) {

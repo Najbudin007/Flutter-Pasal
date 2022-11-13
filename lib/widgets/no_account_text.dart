@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pasal/presentation/resources/color_manager.dart';
-import 'package:pasal/presentation/resources/size_config.dart';
+// import 'package:pasal/presentation/resources/size_config.dart';
 import '../presentation/resources/string_manager.dart';
 
 class NoAccountText extends StatelessWidget {
@@ -13,9 +13,9 @@ class NoAccountText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           AppStrings.noAccount,
-          style: TextStyle(fontSize: getProportionateScreenWidth(16)),
+          style: TextStyle(fontSize: 16),
         ),
         GestureDetector(
           onTap: () {
@@ -23,9 +23,7 @@ class NoAccountText extends StatelessWidget {
           },
           child: Text(
             AppStrings.signUp,
-            style: TextStyle(
-                fontSize: getProportionateScreenWidth(16),
-                color: ColorManager.kPrimaryColor),
+            style: TextStyle(fontSize: 16, color: ColorManager.kPrimaryColor),
           ),
         ),
       ],

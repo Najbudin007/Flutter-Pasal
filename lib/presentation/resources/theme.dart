@@ -7,7 +7,7 @@ ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
     fontFamily: "Muli",
-    appBarTheme: const AppBarTheme(),
+    appBarTheme: appBarTheme(),
     inputDecorationTheme: const InputDecorationTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
