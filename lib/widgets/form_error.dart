@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pasal/presentation/resources/asset_manager.dart';
-import 'package:pasal/presentation/resources/size_config.dart';
 
 class FormError extends StatelessWidget {
   const FormError({super.key, this.errors});
@@ -20,8 +19,8 @@ class FormError extends StatelessWidget {
       children: [
         SvgPicture.asset(
           ImageAssts.errorIcon,
-          height: getProportionateScreenWidth(14),
-          width: getProportionateScreenWidth(14),
+          height: 14,
+          width: 14,
         ),
         Text(error),
       ],

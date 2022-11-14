@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pasal/presentation/resources/color_manager.dart';
+import 'package:pasal/presentation/resources/routes_manager.dart';
 // import 'package:pasal/presentation/resources/size_config.dart';
 import '../presentation/resources/string_manager.dart';
 
@@ -19,7 +20,7 @@ class NoAccountText extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            //Navigator.pushNamed(context, SignUpScreen.routeName)
+            Navigator.pushReplacementNamed(context, Routes.signUpRoute);
           },
           child: Text(
             AppStrings.signUp,

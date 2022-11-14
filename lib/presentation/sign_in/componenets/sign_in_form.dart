@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pasal/app/constants/app.constants.dart';
-import 'package:pasal/presentation/helper/keyboard_utlis.dart';
 import 'package:pasal/presentation/resources/asset_manager.dart';
-import 'package:pasal/presentation/resources/size_config.dart';
 import 'package:pasal/presentation/sign_in/sign_in_controller.dart';
 import 'package:pasal/widgets/custom_surfix_icon.dart';
 import 'package:pasal/widgets/form_error.dart';
@@ -51,14 +49,14 @@ class SignForm extends StatelessWidget {
             ],
           ),
           FormError(errors: _signInController.errors),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          const SizedBox(height: 20),
           DefaultButton(
             text: AppStrings.continueText,
             press: () {
               if (_signInController.formKey.currentState!.validate()) {
                 _signInController.formKey.currentState!.save();
                 // if all are valid then go to success screen
-                KeyboardUtil.hideKeyboard(context);
+                //  KeyboardUtil.hideKeyboard(context);
                 //  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               }
             },
