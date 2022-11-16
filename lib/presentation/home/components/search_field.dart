@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:pasal/presentation/resources/color_manager.dart';
 import 'package:pasal/presentation/resources/size_config.dart';
@@ -17,15 +19,13 @@ class SearchField extends StatelessWidget {
       ),
       child: TextField(
         onChanged: (value) => print(value),
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20),
-                vertical: getProportionateScreenWidth(9)),
+        decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 9),
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
             hintText: "Search product",
-            prefixIcon: const Icon(Icons.search)),
+            prefixIcon: Icon(Icons.search)),
       ),
     );
   }

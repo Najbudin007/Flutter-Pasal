@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pasal/presentation/Complete_profile/componentes/complete_profile_form.dart';
+import 'package:pasal/presentation/complete_profile/componentes/complete_profile_form.dart';
 import 'package:pasal/presentation/resources/size_config.dart';
 import '../../../widgets/no_account_text.dart';
 import '../../../widgets/social_card.dart';

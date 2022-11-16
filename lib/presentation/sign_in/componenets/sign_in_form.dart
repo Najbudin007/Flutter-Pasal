@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pasal/app/constants/app.constants.dart';
 import 'package:pasal/presentation/resources/asset_manager.dart';
+import 'package:pasal/presentation/resources/routes_manager.dart';
 import 'package:pasal/presentation/sign_in/sign_in_controller.dart';
 import 'package:pasal/widgets/custom_surfix_icon.dart';
 import 'package:pasal/widgets/form_error.dart';
@@ -57,7 +58,7 @@ class SignForm extends StatelessWidget {
                 _signInController.formKey.currentState!.save();
                 // if all are valid then go to success screen
                 //  KeyboardUtil.hideKeyboard(context);
-                //  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                Navigator.pushReplacementNamed(context, Routes.homeScreen);
               }
             },
           ),
