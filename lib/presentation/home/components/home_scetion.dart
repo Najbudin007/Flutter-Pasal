@@ -22,11 +22,11 @@ class HomeSection extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            PopularProduct(),
+            SpecialOffers(),
             SizedBox(
               height: 20,
             ),
-            SpecialOffers(),
+            PopularProduct(),
             SizedBox(
               height: 20,
             ),

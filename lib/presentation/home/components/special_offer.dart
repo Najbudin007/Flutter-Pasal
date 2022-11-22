@@ -24,7 +24,14 @@ class SpecialOffers extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: const [
-              SpecialOfferCard(image: ImageAssts.imageBanner2, numOfBrand: 6),
+              SpecialOfferCard(
+                  image: ImageAssts.imageBanner2,
+                  category: "Fashion",
+                  numOfBrand: 6),
+              SpecialOfferCard(
+                  image: ImageAssts.imageBanner2,
+                  category: "Fashion",
+                  numOfBrand: 6),
               SizedBox(
                 width: 20,
               )

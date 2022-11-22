@@ -10,10 +10,17 @@ import '../../../widgets/default_button.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/string_manager.dart';
 
-class SignForm extends StatelessWidget {
-  SignForm({super.key});
+class SignForm extends StatefulWidget {
+  const SignForm({super.key});
 
+  @override
+  State<SignForm> createState() => _SignFormState();
+}
+
+class _SignFormState extends State<SignForm> {
   final SignInController _signInController = Get.put(SignInController());
+  // show the password or not
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +76,7 @@ class SignForm extends StatelessWidget {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-      obscureText: true,
+      obscureText: _isObscure,
       onSaved: (newValue) => _signInController.password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -93,7 +100,14 @@ class SignForm extends StatelessWidget {
         labelText: AppStrings.password,
         hintText: AppStrings.enterPassword,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: const CustomSurfixIcon(svgIcon: ImageAssts.lockIcon),
+        suffixIcon: IconButton(
+          onPressed: (() {
+            setState(() {
+              _isObscure = !_isObscure;
+            });
+          }),
+          icon: Icon(_isObscure ? Icons.visibility_off : Icons.visibility),
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide(color: ColorManager.kTextColor),
