@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CartCard extends StatelessWidget {
   const CartCard({super.key});
@@ -15,12 +12,12 @@ class CartCard extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 0.88,
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: const Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(),
+              child: Image.asset(''),
             ),
           ),
         ),
@@ -29,10 +26,10 @@ class CartCard extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const [
             Text(
-              cart.product.title,
-              style: const TextStyle(color: Colors.black, fontSize: 16),
+              'this is demo',
+              style: TextStyle(color: Colors.black, fontSize: 16),
               maxLines: 2,
             ),
           ],

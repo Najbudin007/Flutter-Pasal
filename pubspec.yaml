@@ -39,6 +39,9 @@ dependencies:
   get: ^4.6.5
   flutter_svg: ^1.1.6
   confetti: ^0.7.0
+  http: ^0.13.5
+  shared_preferences: ^2.0.15
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_test:
